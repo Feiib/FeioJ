@@ -1,0 +1,37 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: feioj-nacos:8848 # localhost 改为 nacos
+      config:
+        server-addr: feioj-nacos:8848
+        group: DEFAULT_GROUP
+    gateway:
+      routes:
+        - id: feioj-backend-user-service
+          uri: lb://feioj-backend-user-service
+          predicates:
+            - Path=/api/user/**
+        - id: feioj-backend-question-service
+          uri: lb://feioj-backend-question-service
+          predicates:
+            - Path=/api/question/**
+        - id: feioj-backend-judge-service
+          uri: lb://feioj-backend-judge-service
+          predicates:
+            - Path=/api/judge/**
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
+  application:
+    name: feioj-backend-gateway
+  main:
+    web-application-type: reactive
+server:
+  port: 8101
+knife4j:
+  gateway:
+    enabled: true
+    strategy: discover
+    discover:
+      enabled: true
+      version: swagger2

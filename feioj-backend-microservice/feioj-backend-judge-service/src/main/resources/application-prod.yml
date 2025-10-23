@@ -1,0 +1,24 @@
+# 生产环境配置文件
+spring:
+  # 数据库配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://feioj-mysql:3306/feioj # localhost 改为 mysql
+    username: root
+    password: Fn#kJ4nB7%6
+  # Redis 配置
+  redis:
+    database: 1
+    host: feioj-redis # localhost 改为 redis
+    port: 6379
+    timeout: 5000
+    password: H%hNb73@gvn
+  cloud:
+    nacos:
+      discovery:
+        server-addr: feioj-nacos:8848 # localhost 改为 nacos
+  rabbitmq:
+    host: feioj-rabbitmq # localhost 改为 rabbitmq
+    port: 5672
+    password: guest
+    username: guest
