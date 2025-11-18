@@ -1,0 +1,22 @@
+
+services:
+  codesandbox:
+    container_name: feioj-codesandbox
+    build:
+      context: /home/code/feioj-codesandbox
+      dockerfile: Dockerfile
+    ports:
+      - "8090:8090"
+    networks:
+      - mynetwork
+    mem_limit: 512m
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+    environment:
+      JAVA_OPTS: "-Xms128m -Xmx256m"
+networks:
+  mynetwork:
+
+
